@@ -3,7 +3,7 @@
 		heatOptions = {
 			tileOpacity: 1,
 			heatOpacity: 1,
-			radius: 25,
+			radius: 13,
 			blur: 15
 		};
 
@@ -18,7 +18,7 @@
 
 		// Initialize the map
 		map = L.map( 'map' ).setView( [0,0], 2 );
-		L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		L.tileLayer( 'https://api.mapbox.com/styles/v1/krdyke/cj9epi0ox7bv62so2vb5l1vjv/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia3JkeWtlIiwiYSI6Ik15RGcwZGMifQ.IR_NpAqXL1ro8mFeTIdifg', {
 			attribution: 'location-history-visualizer is open source and available <a href="https://github.com/theopolisme/location-history-visualizer">on GitHub</a>. Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors.',
 			maxZoom: 18,
 			minZoom: 2
@@ -107,20 +107,10 @@
 		$( '#numberProcessed' ).text( numberProcessed.toLocaleString() );
 
     $( '#launch' ).click( function () {
-      var $email = $( '#email' );
-      if ( $email.is( ':valid' ) ) {
-        $( this ).text( 'Launching... ' );
-        $.post( '/heatmap/submit-email.php', {
-          email: $email.val()
-        } )
-        .always( function () {
           $( 'body' ).addClass( 'map-active' );
           $done.fadeOut();
           activateControls();
-        } );
-      } else {
-        alert( 'Please enter a valid email address to proceed.' );
-      }
+      
     } );
 
 		function activateControls () {
